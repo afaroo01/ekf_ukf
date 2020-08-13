@@ -20,21 +20,32 @@ float get_goal_heading(geometry_msgs::Pose point1, geometry_msgs::Pose point2) {
 // Converts yaw angle from Quaternion to Euler format (radians)
 float yaw_from_quaternion(geometry_msgs::Pose pose_msg)
 {
+  double yaw = tf::getYaw(pose_msg.orientation);
+  /*
   tf::Quaternion q_orientation;
   quaternionMsgToTF(pose_msg.orientation, q_orientation);
   double roll, pitch, yaw;
   tf::Matrix3x3(q_orientation).getRPY(roll, pitch, yaw);
+  */
   return yaw;
 }
 
-void go_to_goal(ros::Publisher &direction_pub, geometry_msgs::Pose current, geometry_msgs::Pose goal, float &dist){
+void go_to_goal(ros::Publisher &direction_pub, geometry_msgs::Pose current, geometry_msgs::Pose goal, float &dist, bool &steering_flip_flag){
   double err_yaw = err_heading_to_goal(current, goal);
 	
 	geometry_msgs::Twist vel;		
 	
 	if (fabs(err_yaw) > g_yaw_precision){
-		vel.angular.z = -g_kp * err_yaw;				
-	} else {
+    if (!steering_flip_flag)
+    {
+      vel.angular.z = -g_kp * err_yaw;
+    }
+    // alternative steering direction if flip_steering_control = true
+    else
+    {
+      vel.angular.z = g_kp * err_yaw;
+    }
+  } else {
 		vel.angular.z = 0;		
 	}
   // set velocity dynamicaly
@@ -54,7 +65,7 @@ void go_to_goal(ros::Publisher &direction_pub, geometry_msgs::Pose current, geom
 	direction_pub.publish(vel);
 }
 
-void turn_to_goal(ros::Publisher &direction_pub, geometry_msgs::Pose current, geometry_msgs::Pose goal){
+void turn_to_goal(ros::Publisher &direction_pub, geometry_msgs::Pose current, geometry_msgs::Pose goal, bool &steering_flip_flag){
 
   double err_yaw = err_heading_to_goal(current, goal);
   ROS_DEBUG_THROTTLE(1, "Turning towards the goal. Current yaw error: [%f]", err_yaw);
@@ -62,9 +73,16 @@ void turn_to_goal(ros::Publisher &direction_pub, geometry_msgs::Pose current, ge
 	geometry_msgs::Twist vel;		
 	
 	if (fabs(err_yaw) > g_yaw_precision){
-		vel.angular.z = -g_kp * err_yaw;
-			
-	} else {
+    if (!steering_flip_flag)
+    {
+      vel.angular.z = -g_kp * err_yaw;
+    }
+    // alternative steering direction if flip_steering_control = true
+    else
+    {
+      vel.angular.z = g_kp * err_yaw;
+    }
+  } else {
 		vel.angular.z = 0;		
 	}
   // pure turn in place, hard coded linear speed '0'

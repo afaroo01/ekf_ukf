@@ -31,7 +31,6 @@ void odom_callback(const nav_msgs::Odometry::ConstPtr &msg){
   ROS_DEBUG_THROTTLE(2, "I heard (x,y): %f,%f", current_pose.position.x, current_pose.position.y);
 }
 
-
 int main(int argc, char **argv)
 {
 
@@ -39,6 +38,11 @@ int main(int argc, char **argv)
 	
 	// create node
   ros::NodeHandle node;
+
+  // get params
+  // change bool value if robot oscillates facing in the opposite direction of target waypoint
+  bool flip_steering_control;
+  node.param<bool>("flip_steering", flip_steering_control, false);
 	
 	// subscribe to odom 
 	ros::Subscriber odom_sub = node.subscribe("odom", 1, odom_callback);
@@ -78,7 +82,7 @@ int main(int argc, char **argv)
 	  		}
 	  		else {
           ROS_DEBUG_THROTTLE(1, "Driving forward pointing towards the goal, distance to goal: %f", dist_to_goal(robot_goal, current_pose));
-  				go_to_goal(direction_pub, current_pose, robot_goal, original_distance);
+  				go_to_goal(direction_pub, current_pose, robot_goal, original_distance, flip_steering_control);
 	  		}
 	  		break;
       case Robot_States::TURN_TO_GOAL:
@@ -87,7 +91,7 @@ int main(int argc, char **argv)
 	  			diff_drive_state = Robot_States::GO_TO_GOAL;
 	  		}
 	  		else {
-  				turn_to_goal(direction_pub, current_pose, robot_goal);
+  				turn_to_goal(direction_pub, current_pose, robot_goal, flip_steering_control);
 	  		}
 	  		break;
   		case Robot_States::STOP:
