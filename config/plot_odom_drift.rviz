@@ -255,7 +255,7 @@ Visualization Manager:
           Value: true
         Value: false
       Enabled: true
-      Keep: 250
+      Keep: 170
       Name: Odom_Ground_Truth
       Position Tolerance: 0.100000001
       Shape:
@@ -289,7 +289,7 @@ Visualization Manager:
           Value: true
         Value: false
       Enabled: true
-      Keep: 250
+      Keep: 170
       Name: Odom_Noisy
       Position Tolerance: 0.100000001
       Shape:
@@ -303,6 +303,40 @@ Visualization Manager:
         Shaft Radius: 0.0500000007
         Value: Arrow
       Topic: /odom_noisy
+      Unreliable: false
+      Value: true
+    - Angle Tolerance: 0.100000001
+      Class: rviz/Odometry
+      Covariance:
+        Orientation:
+          Alpha: 0.5
+          Color: 255; 255; 127
+          Color Style: Unique
+          Frame: Local
+          Offset: 1
+          Scale: 1
+          Value: true
+        Position:
+          Alpha: 0.300000012
+          Color: 204; 51; 204
+          Scale: 1
+          Value: true
+        Value: false
+      Enabled: true
+      Keep: 170
+      Name: Odometry_Filtered
+      Position Tolerance: 0.100000001
+      Shape:
+        Alpha: 1
+        Axes Length: 1
+        Axes Radius: 0.100000001
+        Color: 85; 255; 0
+        Head Length: 0
+        Head Radius: 0
+        Shaft Length: 0.0500000007
+        Shaft Radius: 0.0500000007
+        Value: Arrow
+      Topic: /odometry/filtered
       Unreliable: false
       Value: true
   Enabled: true
@@ -330,25 +364,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 10.2220802
+      Distance: 9.64588547
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0
-        Y: 0
-        Z: 0
+        X: 0.634943247
+        Y: 1.55383527
+        Z: -1.14086103
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.0500000007
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.630398035
+      Pitch: 1.34039807
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 0.980398059
+      Yaw: 1.13539791
     Saved: ~
 Window Geometry:
   Displays:
@@ -366,5 +400,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 940
-  X: 49
-  Y: 30
+  X: 48
+  Y: 10
