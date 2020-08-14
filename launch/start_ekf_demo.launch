@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Top-level launch file for the EKF exercise -->
+
+<launch>
+
+  <!-- Spawn Turtlebot model in Gazebo -->
+  <include file="$(find ekf_ukf)/launch/spawn_turtlebot.launch"/>
+
+  <!-- Starts ROS Node that publishes noisy odometry -->
+  <include file="$(find ekf_ukf)/launch/noisy_odom.launch"/>
+
+  <!-- Starts robot_localization node -->
+  <include file="$(find ekf_ukf)/launch/ekf_filtering.launch"/>
+ 
+  <!-- Rviz launch -->
+  <include file="$(find ekf_ukf)/launch/plot_odom_drift.launch"/>
+
+  <!-- Utility to run in a square path -->
+  <include file="$(find ekf_ukf)/launch/square_path.launch" />
+ 
+</launch>
