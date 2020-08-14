@@ -4,7 +4,7 @@
 
 #include <vector>
 
-//Function who transforms Euler agles (RPY) in quaternion
+// Function who transforms Euler agles (RPY) in quaternion
 tf::Quaternion RPYToQuaternion(float R, float P, float Y)
 {
   tf::Matrix3x3 mat;
@@ -16,6 +16,7 @@ tf::Quaternion RPYToQuaternion(float R, float P, float Y)
   return quat;
 }
 
+// attention: hard coded lenght of waypoint list = 4 (see main.cpp)
 std::vector<geometry_msgs::Pose> build_waypoint_list(){
   std::vector<geometry_msgs::Pose> waypoint_list;
   geometry_msgs::Pose target_waypoint;

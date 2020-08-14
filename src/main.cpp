@@ -60,56 +60,67 @@ int main(int argc, char **argv)
   robot_goal = waypoint_list[goal_index];
   float original_distance = dist_to_goal(robot_goal, current_pose);
 
+  ROS_INFO("Started waypoint sequence controller node");
   ros::Rate rate(20);
   
   // initialize robot state
 	Robot_State diff_drive_state = Robot_States::TURN_TO_GOAL;
+  current_pose.orientation.x = 0;
+  current_pose.orientation.y = 0;
+  current_pose.orientation.z = 0;
+  current_pose.orientation.w = 1;
   
   while (ros::ok()){
 
-    ROS_INFO_THROTTLE(2, "Current action: %s", states_as_text[diff_drive_state].c_str());
+    ROS_INFO_THROTTLE(4, "Current action: %s", states_as_text[diff_drive_state].c_str());
 
-  	switch (diff_drive_state){
+    switch (diff_drive_state)
+    {
 
-  		case Robot_States::GO_TO_GOAL:
-	  		if(dist_to_goal(robot_goal, current_pose) < g_goal_distance){
-	  			ROS_INFO("Goal reached");
-	  			diff_drive_state = Robot_States::STOP;
-	  		}
-        if(fabs(err_heading_to_goal(current_pose, robot_goal)) > g_yaw_precision*2){
-	  			ROS_DEBUG("Driving forward pointing towards wrong heading. Heading to goal: %f > yaw tolerance: %f ", err_heading_to_goal(current_pose, robot_goal), g_yaw_precision);
-	  			diff_drive_state = Robot_States::TURN_TO_GOAL;
-	  		}
-	  		else {
-          ROS_DEBUG_THROTTLE(1, "Driving forward pointing towards the goal, distance to goal: %f", dist_to_goal(robot_goal, current_pose));
-  				go_to_goal(direction_pub, current_pose, robot_goal, original_distance, flip_steering_control);
-	  		}
-	  		break;
-      case Robot_States::TURN_TO_GOAL:
-	  		if(fabs(err_heading_to_goal(current_pose, robot_goal)) < g_yaw_precision){
-	  			ROS_DEBUG("Turn to goal has reached the desired heading, %f", err_heading_to_goal(current_pose, robot_goal));
-	  			diff_drive_state = Robot_States::GO_TO_GOAL;
-	  		}
-	  		else {
-  				turn_to_goal(direction_pub, current_pose, robot_goal, flip_steering_control);
-	  		}
-	  		break;
-  		case Robot_States::STOP:
-  			stop(direction_pub);
-        // hard coded lenght of waypoint list: 4
-        goal_index++;
-        goal_index = (goal_index % 4) ? goal_index : goal_index = 0;
-        robot_goal = waypoint_list[goal_index];
-        original_distance = dist_to_goal(robot_goal, current_pose);
+    case Robot_States::GO_TO_GOAL:
+      if (dist_to_goal(robot_goal, current_pose) < g_goal_distance)
+      {
+        ROS_INFO("Waypoint reached");
+        diff_drive_state = Robot_States::STOP;
+      }
+      if (fabs(err_heading_to_goal(current_pose, robot_goal)) > g_yaw_precision * 2)
+      {
+        ROS_DEBUG("Driving forward pointing towards wrong heading. Heading to goal: %f > yaw tolerance: %f ", err_heading_to_goal(current_pose, robot_goal), g_yaw_precision);
         diff_drive_state = Robot_States::TURN_TO_GOAL;
-  			break;
-  			
-  		default:
-  			ROS_INFO("Unknown state!");
-  			break;
-  	}
+      }
+      else
+      {
+        ROS_DEBUG_THROTTLE(1, "Driving forward pointing towards the goal, distance to goal: %f", dist_to_goal(robot_goal, current_pose));
+        go_to_goal(direction_pub, current_pose, robot_goal, original_distance, flip_steering_control);
+      }
+      break;
+    case Robot_States::TURN_TO_GOAL:
+      if (fabs(err_heading_to_goal(current_pose, robot_goal)) < g_yaw_precision)
+      {
+        ROS_DEBUG("Turn to goal has reached the desired heading, %f", err_heading_to_goal(current_pose, robot_goal));
+        diff_drive_state = Robot_States::GO_TO_GOAL;
+      }
+      else
+      {
+        turn_to_goal(direction_pub, current_pose, robot_goal, flip_steering_control);
+      }
+      break;
+    case Robot_States::STOP:
+      stop(direction_pub);
+      // attention: hard coded lenght of waypoint list = 4
+      goal_index++;
+      goal_index = (goal_index % 4) ? goal_index : goal_index = 0;
+      robot_goal = waypoint_list[goal_index];
+      original_distance = dist_to_goal(robot_goal, current_pose);
+      diff_drive_state = Robot_States::TURN_TO_GOAL;
+      break;
 
-		ros::spinOnce();
+    default:
+      ROS_INFO("Unknown state!");
+      break;
+    }
+
+    ros::spinOnce();
 		rate.sleep();
   }
   return 0;
