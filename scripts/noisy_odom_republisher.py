@@ -155,4 +155,5 @@ if __name__ == '__main__':
 
     pub = rospy.Publisher('odom_noisy', Odometry, queue_size=1)
     rospy.Subscriber('odom', Odometry, odometry_callback)
+    rospy.loginfo("Started noisy odometry publisher node") 
     rospy.spin()
