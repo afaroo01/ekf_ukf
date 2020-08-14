@@ -426,6 +426,7 @@
       </sensor>
    </gazebo>
    -->
+   <!--
    <gazebo reference="gyro_link">
     <gravity>true</gravity>
     <sensor name="imu" type="imu">
@@ -444,6 +445,22 @@
       </plugin>
       <pose>0 0 0 0 0 0</pose>
     </sensor>
+  </gazebo>
+  -->
+
+  <gazebo>
+    <plugin name="imu_controller" filename="libhector_gazebo_ros_imu.so">
+      <robotNamespace>/</robotNamespace>
+      <updateRate>50.0</updateRate>
+      <bodyName>gyro_link</bodyName>
+      <topicName>/mobile_base/sensors/imu_data_raw</topicName>
+      <accelDrift>0.005 0.005 0.005</accelDrift>
+      <accelGaussianNoise>0.005 0.005 0.005</accelGaussianNoise>
+      <rateDrift>0.005 0.005 0.005 </rateDrift>
+      <rateGaussianNoise>0.005 0.005 0.005 </rateGaussianNoise>
+      <headingDrift>0.005</headingDrift>
+      <headingGaussianNoise>0.005</headingGaussianNoise>
+    </plugin>
   </gazebo>
 
    <gazebo>
