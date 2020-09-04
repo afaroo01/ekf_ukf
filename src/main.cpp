@@ -25,6 +25,9 @@ geometry_msgs::Pose current_pose;
 // hard coded goal tolerance
 const double g_goal_distance = 0.05;
 
+// hard coded flag, whether to loop waypoints or shutdown node
+bool loop = false;
+
 // get odometry
 void odom_callback(const nav_msgs::Odometry::ConstPtr &msg){
 	current_pose = msg->pose.pose;
@@ -107,12 +110,30 @@ int main(int argc, char **argv)
       break;
     case Robot_States::STOP:
       stop(direction_pub);
-      // attention: hard coded lenght of waypoint list = 4
       goal_index++;
-      goal_index = (goal_index % 4) ? goal_index : goal_index = 0;
-      robot_goal = waypoint_list[goal_index];
-      original_distance = dist_to_goal(robot_goal, current_pose);
-      diff_drive_state = Robot_States::TURN_TO_GOAL;
+      // verify if all waypoints were traversed
+      // attention: hard coded lenght of waypoint list = 4
+      if (!(goal_index % 4))
+      {
+        if (loop)
+        {
+          goal_index = 0;
+          robot_goal = waypoint_list[goal_index];
+          original_distance = dist_to_goal(robot_goal, current_pose);
+          diff_drive_state = Robot_States::TURN_TO_GOAL;
+        }
+        else
+        {
+          ROS_INFO("Shuting down move_in_square!");
+          ros::shutdown();
+        }
+      }
+      else
+      {
+        robot_goal = waypoint_list[goal_index];
+        original_distance = dist_to_goal(robot_goal, current_pose);
+        diff_drive_state = Robot_States::TURN_TO_GOAL;
+      }
       break;
 
     default:
