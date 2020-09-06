@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 '''
-Kudos to: Team Leonard, University of Birmingham Intelligent Robotics 2018
+Modified version of the original from: Team Leonard, University of Birmingham Intelligent Robotics 2018
 '''
 
 import rospy
@@ -10,7 +10,7 @@ import random
 from random import gauss
 from nav_msgs.msg import Odometry
 from geometry_msgs.msg import Point, Quaternion, Vector3
-
+from std_srvs.srv import Empty, EmptyResponse
 # sl = standard deviation of the linear velocity Gaussian noise
 # sa = standard deviation of the angular velocity Gaussian noise
 sl, sa = 0.1, 0.5
@@ -148,12 +148,28 @@ def odometry_callback(odom):
     pub.publish(odom)
     rospy.logdebug("Pub noisy odom: {} {}".format(odom.pose.pose.position.x, odom.pose.pose.position.y)) 
 
+def shutdown_callback(_):
+    global shutdown_flag
+    response = EmptyResponse()
+    # set shutdown flag
+    shutdown_flag = True
+    return response
+
+def clean_shutdown():
+    rospy.loginfo("Shutting down noisy odometry node...")
 
 if __name__ == '__main__':
-    global pub
+    global pub, shutdown_flag
+    shutdown_flag = False
     rospy.init_node('noisy_odom')
 
     pub = rospy.Publisher('odom_noisy', Odometry, queue_size=1)
     rospy.Subscriber('odom', Odometry, odometry_callback)
-    rospy.loginfo("Started noisy odometry publisher node") 
-    rospy.spin()
+    shutdown_service = rospy.Service('/noisy_odom/shutdown', Empty, shutdown_callback)
+    rospy.loginfo("Started noisy odometry publisher node")
+    # cleanup on shutdown
+    rospy.on_shutdown(clean_shutdown)
+    # equivalent to spin()
+    while not rospy.core.is_shutdown() and not shutdown_flag:
+      rospy.rostime.wallsleep(0.5)
+    rospy.Timer(rospy.Duration(1), rospy.signal_shutdown('Shutting down'), oneshot=True)
