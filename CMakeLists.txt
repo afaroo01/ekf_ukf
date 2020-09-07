@@ -154,7 +154,6 @@ target_link_libraries(move_in_square
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 # add_dependencies(move_in_square ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-add_dependencies(move_in_square ekf_ukf_generate_messages_cpp)
 
 #############
 ## Install ##
