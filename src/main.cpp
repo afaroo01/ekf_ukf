@@ -2,6 +2,7 @@
 #include <nav_msgs/Odometry.h>
 #include <tf/tf.h>
 #include <geometry_msgs/Pose.h>
+#include <std_srvs/Empty.h>
 
 #include "ekf_ukf/actions.h"
 #include "ekf_ukf/waypoints.h"
@@ -46,6 +47,11 @@ int main(int argc, char **argv)
   // change bool value if robot oscillates facing in the opposite direction of target waypoint
   bool flip_steering_control;
   node.param<bool>("flip_steering", flip_steering_control, false);
+
+  // Shutdown service client
+  std::string srv_name = "/node_manager/shutdown";
+  ros::ServiceClient shutdown_client = node.serviceClient<std_srvs::Empty>(srv_name);
+  std_srvs::Empty srv1;
 	
 	// subscribe to odom 
 	ros::Subscriber odom_sub = node.subscribe("odom", 1, odom_callback);
@@ -125,6 +131,8 @@ int main(int argc, char **argv)
         else
         {
           ROS_INFO("Shuting down move_in_square!");
+          // call shutdown service
+          shutdown_client.call(srv1);
           ros::shutdown();
         }
       }
