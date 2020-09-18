@@ -71,7 +71,7 @@
       <visual>
          <geometry>
             <!-- new mesh -->
-            <mesh filename="package://ekf_ukf/urdf/meshes/main_body.dae" />
+            <mesh filename="package://kobuki_description/meshes/main_body.dae" />
          </geometry>
          <origin rpy="0 0 0" xyz="0.001 0 0.05199" />
       </visual>
@@ -105,7 +105,7 @@
    <link name="wheel_left_link">
       <visual>
          <geometry>
-            <mesh filename="package://ekf_ukf/urdf/meshes/wheel.dae" />
+            <mesh filename="package://kobuki_description/meshes/wheel.dae" />
          </geometry>
          <origin rpy="0 0 0" xyz="0 0 0" />
       </visual>
@@ -130,7 +130,7 @@
    <link name="wheel_right_link">
       <visual>
          <geometry>
-            <mesh filename="package://ekf_ukf/urdf/meshes/wheel.dae" />
+            <mesh filename="package://kobuki_description/meshes/wheel.dae" />
          </geometry>
          <origin rpy="0 0 0" xyz="0 0 0" />
       </visual>
@@ -255,7 +255,7 @@
             <!--
             <mesh filename="package://hokuyo/meshes/hokuyo.dae" />
             -->
-            <mesh filename="package://ekf_ukf/models/hokuyo/meshes/hokuyo.dae" />
+            <mesh filename="package://particle_filter/models/hokuyo/meshes/hokuyo.dae" />
          </geometry>
       </visual>
    </link>
@@ -553,7 +553,7 @@
             <!--
             <mesh filename="package://turtlebot_description/meshes/stacks/hexagons/pole_bottom.dae"/>
             -->
-            <mesh filename="package://ekf_ukf/urdf/meshes/stacks/hexagons/pole_bottom.dae" />
+            <mesh filename="package://kobuki_description/meshes/stacks/hexagons/pole_bottom.dae" />
          </geometry>
       </visual>
       <collision>
@@ -577,7 +577,7 @@
       <visual>
          <origin rpy="0 0 0" xyz="0 0 0" />
          <geometry>
-            <mesh filename="package://ekf_ukf/urdf/meshes/stacks/hexagons/pole_bottom.dae" />
+            <mesh filename="package://kobuki_description/meshes/stacks/hexagons/pole_bottom.dae" />
          </geometry>
       </visual>
       <collision>
@@ -601,7 +601,7 @@
       <visual>
          <origin rpy="0 0 0" xyz="0 0 0" />
          <geometry>
-            <mesh filename="package://ekf_ukf/urdf/meshes/stacks/hexagons/pole_bottom.dae" />
+            <mesh filename="package://kobuki_description/meshes/stacks/hexagons/pole_bottom.dae" />
          </geometry>
       </visual>
       <collision>
@@ -625,7 +625,7 @@
       <visual>
          <origin rpy="0 0 0" xyz="0 0 0" />
          <geometry>
-            <mesh filename="package://ekf_ukf/urdf/meshes/stacks/hexagons/pole_bottom.dae" />
+            <mesh filename="package://kobuki_description/meshes/stacks/hexagons/pole_bottom.dae" />
          </geometry>
       </visual>
       <collision>
@@ -649,7 +649,7 @@
       <visual>
          <origin rpy="0 0 0" xyz="0 0 0" />
          <geometry>
-            <mesh filename="package://ekf_ukf/urdf/meshes/stacks/hexagons/pole_bottom.dae" />
+            <mesh filename="package://kobuki_description/meshes/stacks/hexagons/pole_bottom.dae" />
          </geometry>
       </visual>
       <collision>
@@ -673,7 +673,7 @@
       <visual>
          <origin rpy="0 0 0" xyz="0 0 0" />
          <geometry>
-            <mesh filename="package://ekf_ukf/urdf/meshes/stacks/hexagons/pole_bottom.dae" />
+            <mesh filename="package://kobuki_description/meshes/stacks/hexagons/pole_bottom.dae" />
          </geometry>
       </visual>
       <collision>
@@ -697,7 +697,7 @@
       <visual>
          <origin rpy="0 0 0" xyz="0 0 0" />
          <geometry>
-            <mesh filename="package://ekf_ukf/urdf/meshes/stacks/hexagons/plate_bottom.dae" />
+            <mesh filename="package://kobuki_description/meshes/stacks/hexagons/plate_bottom.dae" />
          </geometry>
       </visual>
       <collision>
@@ -721,7 +721,7 @@
       <visual>
          <origin rpy="0 3.14159265359 0" xyz="0 0 0" />
          <geometry>
-            <mesh filename="package://ekf_ukf/urdf/meshes/stacks/hexagons/pole_middle.dae" />
+            <mesh filename="package://kobuki_description/meshes/stacks/hexagons/pole_middle.dae" />
          </geometry>
       </visual>
       <collision>
@@ -745,7 +745,7 @@
       <visual>
          <origin rpy="0 3.14159265359 0" xyz="0 0 0" />
          <geometry>
-            <mesh filename="package://ekf_ukf/urdf/meshes/stacks/hexagons/pole_middle.dae" />
+            <mesh filename="package://kobuki_description/meshes/stacks/hexagons/pole_middle.dae" />
          </geometry>
       </visual>
       <collision>
@@ -769,7 +769,7 @@
       <visual>
          <origin rpy="0 3.14159265359 0" xyz="0 0 0" />
          <geometry>
-            <mesh filename="package://ekf_ukf/urdf/meshes/stacks/hexagons/pole_middle.dae" />
+            <mesh filename="package://kobuki_description/meshes/stacks/hexagons/pole_middle.dae" />
          </geometry>
       </visual>
       <collision>
@@ -793,7 +793,7 @@
       <visual>
          <origin rpy="0 3.14159265359 0" xyz="0 0 0" />
          <geometry>
-            <mesh filename="package://ekf_ukf/urdf/meshes/stacks/hexagons/pole_middle.dae" />
+            <mesh filename="package://kobuki_description/meshes/stacks/hexagons/pole_middle.dae" />
          </geometry>
       </visual>
       <collision>
@@ -817,7 +817,7 @@
       <visual>
          <origin rpy="0 0 0" xyz="0 0 0" />
          <geometry>
-            <mesh filename="package://ekf_ukf/urdf/meshes/stacks/hexagons/plate_middle.dae" />
+            <mesh filename="package://kobuki_description/meshes/stacks/hexagons/plate_middle.dae" />
          </geometry>
       </visual>
       <collision>
@@ -844,7 +844,7 @@
             <!--
             <mesh filename="package://turtlebot_description/meshes/stacks/hexagons/pole_top.dae" />
             -->
-            <mesh filename="package://ekf_ukf/urdf/meshes/stacks/hexagons/pole_top.dae" />
+            <mesh filename="package://kobuki_description/meshes/stacks/hexagons/pole_top.dae" />
          </geometry>
       </visual>
       <collision>
@@ -871,7 +871,7 @@
             <!--
             <mesh filename="package://turtlebot_description/meshes/stacks/hexagons/pole_top.dae" />
             -->
-            <mesh filename="package://ekf_ukf/urdf/meshes/stacks/hexagons/pole_top.dae" />
+            <mesh filename="package://kobuki_description/meshes/stacks/hexagons/pole_top.dae" />
          </geometry>
       </visual>
       <collision>
@@ -898,7 +898,7 @@
             <!--
             <mesh filename="package://turtlebot_description/meshes/stacks/hexagons/pole_top.dae" />
             -->
-            <mesh filename="package://ekf_ukf/urdf/meshes/stacks/hexagons/pole_top.dae" />
+            <mesh filename="package://kobuki_description/meshes/stacks/hexagons/pole_top.dae" />
          </geometry>
       </visual>
       <collision>
@@ -925,7 +925,7 @@
             <!--
             <mesh filename="package://turtlebot_description/meshes/stacks/hexagons/pole_top.dae" />
             -->
-            <mesh filename="package://ekf_ukf/urdf/meshes/stacks/hexagons/pole_top.dae" />
+            <mesh filename="package://kobuki_description/meshes/stacks/hexagons/pole_top.dae" />
          </geometry>
       </visual>
       <collision>
@@ -949,7 +949,7 @@
       <visual>
          <origin rpy="0 0 0" xyz="0 0 -0.01" />
          <geometry>
-            <mesh filename="package://ekf_ukf/urdf/meshes/stacks/hexagons/sensor_pole.dae" />
+            <mesh filename="package://kobuki_description/meshes/sensors/sensor_pole.dae" />
          </geometry>
       </visual>
       <collision>
@@ -973,7 +973,7 @@
       <visual>
          <origin rpy="0 0 0" xyz="0 0 -0.01" />
          <geometry>
-            <mesh filename="package://ekf_ukf/urdf/meshes/stacks/hexagons/sensor_pole.dae" />
+            <mesh filename="package://kobuki_description/meshes/sensors/sensor_pole.dae" />
          </geometry>
       </visual>
       <collision>
@@ -997,7 +997,7 @@
       <visual>
          <origin rpy="0 0 0" xyz="0 0 0" />
          <geometry>
-            <mesh filename="package://ekf_ukf/urdf/meshes/stacks/hexagons/plate_top.dae" />
+            <mesh filename="package://kobuki_description/meshes/stacks/hexagons/plate_top.dae" />
          </geometry>
       </visual>
       <collision>
@@ -1033,7 +1033,7 @@
       <visual>
          <origin rpy="0 0 0" xyz="-0.015 0.0035 0.004" />
          <geometry>
-            <mesh filename="package://ekf_ukf/urdf/meshes/stacks/hexagons/xtion_pro_camera.dae" />
+            <mesh filename="package://kobuki_description/meshes/sensors/xtion_pro_camera.dae" />
          </geometry>
       </visual>
       <collision>
@@ -1106,7 +1106,7 @@
       <visual>
          <origin rpy="-1.57079632679 0 0" xyz="0 0 0" />
          <geometry>
-            <mesh filename="package://ekf_ukf/urdf/meshes/stacks/hexagons/xtion_pro_stack.dae" />
+            <mesh filename="package://kobuki_description/meshes/sensors/xtion_pro_stack.dae" />
          </geometry>
       </visual>
       <collision>
